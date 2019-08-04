@@ -676,7 +676,7 @@ declare module 'klasa' {
 		private _currentUsage: Tag;
 
 		public run<T = any[]>(prompt: string): Promise<T>;
-		private prompt(text: string): Promise<KlasaMessage>;
+		private prompt(StringResolvable | MessageOptions | MessageAdditions | APIMessage): Promise<KlasaMessage>;
 		private reprompt(prompt: string): Promise<any[]>;
 		private repeatingPrompt(): Promise<any[]>;
 		private validateArgs(): Promise<any[]>;
