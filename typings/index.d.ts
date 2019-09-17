@@ -517,7 +517,7 @@ declare module 'klasa' {
 
 	export abstract class Task extends Piece {
 		public constructor(client: KlasaClient, store: TaskStore, file: string[], directory: string, options?: TaskOptions);
-		public abstract run(data: any): Promise<void>;
+		public abstract run(data?: any): Promise<void>;
 		public toJSON(): PieceTaskJSON;
 	}
 
@@ -1049,6 +1049,7 @@ declare module 'klasa' {
 		monitors?: MonitorOptions;
 		providers?: ProviderOptions;
 		serializers?: SerializerOptions;
+		tasks?: TaskOptions;
 	}
 
 	export interface ProvidersOptions extends Record<string, any> {
