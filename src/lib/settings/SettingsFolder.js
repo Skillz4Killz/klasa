@@ -9,7 +9,7 @@ class SettingsFolder extends Map {
 
 	/**
 	 * @typedef {Object} SettingsFolderResetOptions
-	 * @property {boolean} [throwOnError = false] Whether the update should throw on first failure
+	 * @property {boolean} [throwOnError = true] Whether the update should throw on first failure
 	 * @property {Boolean} [onlyConfigurable = false] Whether the update should ignore non-configureable keys
 	 */
 
@@ -146,7 +146,7 @@ class SettingsFolder extends Map {
 	 * message.guild.settings.reset(['prefix', 'channels.modlog']);
 	 */
 	// eslint-disable-next-line complexity
-	async reset(paths = [...this.keys()], { throwOnError, onlyConfigurable, guild } = {}) {
+	async reset(paths = [...this.keys()], { throwOnError = true, onlyConfigurable, guild } = {}) {
 		const status = this.base.existenceStatus;
 		// If this entry is out of sync, sync it first
 		if (status === null) await this.base.sync();
@@ -239,7 +239,7 @@ class SettingsFolder extends Map {
 		else if (isObject(paths)) [paths, options] = [objectToTuples(paths), args[0]];
 		else [options] = args;
 
-		if (!options) options = { throwOnError: false, onlyConfigurable: false };
+		if (!options) options = { throwOnError: true, onlyConfigurable: false };
 		options.guild = resolveGuild(this.base.gateway.client, 'guild' in options ? options.guild : this.base.target);
 		const language = options.guild ? options.guild.language : this.base.gateway.client.languages.default;
 
